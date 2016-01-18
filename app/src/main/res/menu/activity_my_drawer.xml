@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Shop by Category">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_vegies"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="VEGETABLES &amp; FRUITS " />
+        <item
+            android:id="@+id/nav_dairyprod"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="DAILY NEEDS &amp; DAIRY PRODUCTS" />
+        <item
+            android:id="@+id/nav_grocery"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="GROCERY &amp; STAPLES" />
+        <item
+            android:id="@+id/nav_readycook"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="PRESERVED &amp; READY TO COOK ITEMS" />
+        <item
+            android:id="@+id/nav_snacks"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="BISCUITS &amp; SNACKS" />
+        <item
+            android:id="@+id/nav_beverages"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="BEVERAGES" />
+        <item
+            android:id="@+id/nav_household"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="HOUSEHOLD ITEMS" />
+        <item
+            android:id="@+id/nav_personalcare"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="PRESONAL CARE" />
+    </group>
+    </item>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_aboutus"
+                android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+                android:title="About us" />
+            <item
+                android:id="@+id/nav_contactus"
+                android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+                android:title="Contact us" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

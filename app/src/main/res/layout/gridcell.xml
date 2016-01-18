@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top|right"
+    android:clickable="false">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/removeprod"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/vpid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text=""
+            android:textColor="#040404"
+            android:typeface="sans"
+            android:textSize="15dip"
+            android:textStyle="bold"/>
+
+        <!-- Artist Name -->
+        <TextView
+            android:id="@+id/vpname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="#343434"
+            android:textSize="10dip"
+            android:layout_marginTop="1dip"
+
+            android:text="" />
+
+        <!-- Rightend Duration -->
+        <TextView
+            android:id="@+id/vpdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:text=""
+            android:layout_marginRight="5dip"
+            android:textSize="10dip"
+            android:textColor="#00bcd4"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/vpprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:gravity="right"
+            android:text=""
+            android:layout_marginRight="5dip"
+            android:textSize="10dip"
+            android:textColor="#10bcc9"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:id="@+id/vimageView"
+        android:src = "@mipmap/ic_launcher"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/addproduct" />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.slidingmenusample2.slidingmenu2.VegiesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <GridView
+        android:id="@+id/mygrid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:numColumns="2"
+        android:stretchMode="columnWidth" />
+
+</FrameLayout>
