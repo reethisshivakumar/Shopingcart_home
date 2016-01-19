@@ -30,7 +30,8 @@ import java.io.InputStream;
  * Created by rdm-09 on 02-Jan-16.
  */
 public class GetAllProductListViewAdapter extends BaseAdapter {
-    public TextView cartstatus;
+
+    //public int tot;
     private JSONArray dataarray;
     private Activity activity;
     private static LayoutInflater Inflater=null;
@@ -84,18 +85,24 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
             cell.pname.setText(jsonObject.getString("product_name"));
             cell.pdesc.setText(jsonObject.getString("product_desc"));
             cell.pprice.setText(jsonObject.getString("product_price"));
+            cell.tot = jsonObject.getInt("product_price");
             cell.addcart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //ProductCell holder = (ProductCell)((View)v.getParent()).getTag();
-                    //((GridView) parent).performItemClick(v, position, 0);
+
                     cell.count = cell.count+1;
                     cell.addcart.setText("+" + cell.count);
                    // if (cell.count!=0){
                         cell.removecart.setVisibility(View.VISIBLE);
 
                         Carthelper.itemsCount = Carthelper.itemsCount+1;
-                    ((MyActivity)getActivity()).changeToolBarText();
+                        Carthelper.grandTotal = Carthelper.grandTotal+ cell.tot ;
+                                ((GridView) parent).performItemClick(v, position, 0);
+                   /* ((MyActivity)getActivity()).findViewById(R.id.cartstatus);
+                    cartstatus =(TextView)convertView.findViewById(R.id.cartstatus);*/
+
+                   // ((MyActivity)getActivity()).changeToolBarText();
                        // cartstatus = (TextView)convertView.findViewById(R.id.cartstatus);
                    // }
                 }
@@ -106,7 +113,7 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                 cell.removecart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       // ((GridView) parent).performItemClick(v, position, 0);
+
                         cell.count = cell.count - 1;
                         if (cell.count==0) {
                             cell.removecart.setVisibility(View.INVISIBLE);
@@ -114,8 +121,11 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                         }
                         else {
                             cell.addcart.setText("+" + cell.count);
-                            Carthelper.itemsCount = Carthelper.itemsCount-1;
+
                         }
+                        Carthelper.itemsCount = Carthelper.itemsCount-1;
+                        Carthelper.grandTotal = Carthelper.grandTotal- cell.tot;
+                        ((GridView) parent).performItemClick(v, position, 0);
                     }
                 });
            // }
@@ -160,6 +170,7 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
         private ImageView prodimg;
         private Button addcart,removecart;
         private int count;
+        private int tot;
 
     }
 }

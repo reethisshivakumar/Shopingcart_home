@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,8 @@ public class VegiesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myview=inflater.inflate(R.layout.fragment_vegies, container, false);
+        cartstatus=(TextView)getActivity().findViewById(R.id.cartstatus);
+        //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         this.GetAllProductListView=(GridView)myview.findViewById(R.id.mygrid);
         new GetAllProductTask().execute(new ApiConnector());
 
@@ -105,6 +108,24 @@ public class VegiesFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //((MyActivity)getActivity()).findViewById(R.id.cartstatus);
+              //  cartstatus = (TextView)myview.findViewById(R.id.cartstatus);
+
+                switch (view.getId()) {
+                    case R.id.addproduct:
+                    if (Carthelper.itemsCount != 0) {
+                        cartstatus.setText(Carthelper.itemsCount + "");
+                    }
+                        break;
+                    case R.id.removeprod:
+                        if (Carthelper.itemsCount == 0) {
+                            cartstatus.setText("");
+                        } else {
+                            cartstatus.setText(Carthelper.itemsCount + "");
+                        }
+                        break;
+
+                }
                 /*try {
                     JSONObject productClicked = jsonArray.getJSONObject(position);
                     Intent showdetails = new Intent(getActivity(), Productdetailsfragment.class);
@@ -118,30 +139,32 @@ public class VegiesFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }*/
-                long viewid= view.getId();
-                switch (view.getId())
+                //long viewid= view.getId();
+               /* switch (view.getId())
                 {
                     case R.id.addproduct:
                        // cartstatus = (TextView)myview.findViewById(R.id.cartstatus);
 
-                        Carthelper.itemsCount = Carthelper.itemsCount+1;
+                        //Carthelper.itemsCount = Carthelper.itemsCount+1;
                         ((MyActivity)getActivity()).changeToolBarText(Carthelper.itemsCount+"");
                         //cartstatus.setText(Carthelper.itemsCount+"");
                         //Toast.makeText(getActivity(),"Grid number "+position+" add to cart clicked",Toast.LENGTH_LONG).show();
                         break;
                     case R.id.removeprod:
-                        cartstatus = (TextView)myview.findViewById(R.id.cartstatus);
+                        //cartstatus = (TextView)myview.findViewById(R.id.cartstatus);
                         Carthelper.itemsCount = Carthelper.itemsCount-1;
                         if (Carthelper.itemsCount==0)
                         {
                             cartstatus.setText("");
+                            ((MyActivity)getActivity()).changeToolBarText("");
                         }
                         else {
-                            cartstatus.setText(Carthelper.itemsCount+"");
+                            ((MyActivity)getActivity()).changeToolBarText(Carthelper.itemsCount+"");
+                            cartstatus.setText(Carthelper.itemsCount + "");
                         }
                         //Toast.makeText(getActivity(),"Grid number "+position+" remove from cart clicked",Toast.LENGTH_LONG).show();
                         break;
-                }
+                }*/
                /* if (viewid==R.id.addproduct)
                 {
                    // int a=0;

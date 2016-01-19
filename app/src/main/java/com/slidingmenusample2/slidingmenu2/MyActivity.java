@@ -22,7 +22,7 @@ public class MyActivity extends AppCompatActivity
         implements VegiesFragment.OnFragmentInteractionListener,DairyproductsFragment.OnFragmentInteractionListener, ProductdetailsFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
    // Fragment fragment=null;
     Toolbar toolbar;
-    TextView cartstatus;
+   // TextView cartstatus;
     private VegiesFragment f1;
     private DairyproductsFragment f2;
     @Override
@@ -43,19 +43,25 @@ public class MyActivity extends AppCompatActivity
 
 
          toolbar = (Toolbar) findViewById(R.id.toolbar);
-         cartstatus  = (TextView)toolbar.findViewById(R.id.cartstatus);
-
+         //cartstatus  = (TextView)findViewById(R.id.cartstatus);
+       /* if (Carthelper.itemsCount==0)
+        {
+            cartstatus.setText("");
+        }
+        else {
+            cartstatus.setText(Carthelper.itemsCount+"");
+        }*/
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if(Carthelper.itemsCount!=0)
+        /*if(Carthelper.itemsCount!=0)
         {
 
-        }
+        }*/
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Total: "+Carthelper.grandTotal, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -150,8 +156,8 @@ public class MyActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
-    public void changeToolBarText(String txt){
+   /* public void changeToolBarText(String txt){
         cartstatus.setText(txt);
-    }
+    }*/
 
 }
