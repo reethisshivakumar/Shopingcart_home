@@ -1,9 +1,12 @@
 package com.slidingmenusample2.slidingmenu2;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import java.net.URI;
 public class MyActivity extends AppCompatActivity
         implements VegiesFragment.OnFragmentInteractionListener,DairyproductsFragment.OnFragmentInteractionListener, ProductdetailsFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
    // Fragment fragment=null;
+   protected static SQLiteDatabase db;
     Toolbar toolbar;
    // TextView cartstatus;
     private VegiesFragment f1;
@@ -29,7 +33,7 @@ public class MyActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-
+        //createDatabase();
       /*  fragment = new VegiesFragment();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
@@ -159,5 +163,24 @@ public class MyActivity extends AppCompatActivity
    /* public void changeToolBarText(String txt){
         cartstatus.setText(txt);
     }*/
+  /* protected void createDatabase(){
+       db=openOrCreateDatabase("appDB.db", Context.MODE_PRIVATE, null);
+       db.execSQL("CREATE TABLE IF NOT EXISTS cartcontents(p_id VARCHAR PRIMARY KEY NOT NULL,p_name VARCHAR, p_price INTEGER, p_quantity INTEGER);");
+   }*/
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        db=openOrCreateDatabase("appDB.db", Context.MODE_PRIVATE, null);
+        //need to add primary key "p_id VARCHAR PRIMARY KEY NOT NULL"
+        db.execSQL("CREATE TABLE IF NOT EXISTS cartcontents(p_id VARCHAR PRIMARY KEY NOT NULL,p_name VARCHAR, p_price INTEGER, p_quantity INTEGER);");
+        Log.i("DB", "DB created for local use");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 }

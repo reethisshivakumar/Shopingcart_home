@@ -1,7 +1,9 @@
 package com.slidingmenusample2.slidingmenu2;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -32,6 +34,8 @@ import java.io.InputStream;
 public class GetAllProductListViewAdapter extends BaseAdapter {
 
     //public int tot;
+   // public SQLiteDatabase db ;
+
     private JSONArray dataarray;
     private Activity activity;
     private static LayoutInflater Inflater=null;
@@ -80,7 +84,7 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
             cell = (ProductCell)convertView.getTag();
         }
         try{
-            JSONObject jsonObject = this.dataarray.getJSONObject(position);
+            final JSONObject jsonObject = this.dataarray.getJSONObject(position);
             cell.pid.setText(jsonObject.getString("product_id"));
             cell.pname.setText(jsonObject.getString("product_name"));
             cell.pdesc.setText(jsonObject.getString("product_desc"));
@@ -90,12 +94,37 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     //ProductCell holder = (ProductCell)((View)v.getParent()).getTag();
-
-                    cell.count = cell.count+1;
-                    cell.addcart.setText("+" + cell.count);
                    // if (cell.count!=0){
-                        cell.removecart.setVisibility(View.VISIBLE);
 
+                    if (cell.count ==0)
+                    {
+                        //String query = null;
+                        try {
+                           // query = "INSERT INTO cartcontents(p_id,p_name,p_price,p_quantity) VALUES('"+jsonObject.getString("product_id")+"','"+jsonObject.getString("product_name")+"','"+jsonObject.getString("product_price")+"',0);";
+                            ContentValues contentValues  = new ContentValues();
+                            contentValues.put("p_id",jsonObject.getString("product_id"));
+                            contentValues.put("p_name",jsonObject.getString("product_name"));
+                            contentValues.put("p_price",jsonObject.getString("product_price"));
+                            contentValues.put("p_quantity",0);
+                            MyActivity.db.insertWithOnConflict("cartcontents","p_id", contentValues, SQLiteDatabase.CONFLICT_REPLACE);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                       //MyActivity.db.execSQL(query);
+                    }
+                    cell.count = cell.count+1;
+                    ContentValues values = new ContentValues();
+                    values.put("p_quantity",cell.count);
+                    try {
+                        String where = "p_id= ?";
+                        String[] whereargs = new String[]{jsonObject.getString("product_id")};
+                        MyActivity.db.update("cartcontents", values, where, whereargs);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    cell.addcart.setText("+" + cell.count);
+                    cell.removecart.setVisibility(View.VISIBLE);
                         Carthelper.itemsCount = Carthelper.itemsCount+1;
                         Carthelper.grandTotal = Carthelper.grandTotal+ cell.tot ;
                                 ((GridView) parent).performItemClick(v, position, 0);
@@ -118,9 +147,25 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                         if (cell.count==0) {
                             cell.removecart.setVisibility(View.INVISIBLE);
                             cell.addcart.setText("+");
+                            try {
+                                String where = "p_id= ?";
+                                String[] whereargs = new String[]{jsonObject.getString("product_id")};
+                                MyActivity.db.delete("cartcontents", where, whereargs);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                         else {
                             cell.addcart.setText("+" + cell.count);
+                            ContentValues values = new ContentValues();
+                            values.put("p_quantity",cell.count);
+                            try {
+                                String where = "p_id= ?";
+                                String[] whereargs = new String[]{jsonObject.getString("product_id")};
+                                MyActivity.db.update("cartcontents", values, where, whereargs);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                         }
                         Carthelper.itemsCount = Carthelper.itemsCount-1;
