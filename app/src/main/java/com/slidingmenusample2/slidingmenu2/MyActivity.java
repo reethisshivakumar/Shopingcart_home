@@ -1,6 +1,7 @@
 package com.slidingmenusample2.slidingmenu2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class MyActivity extends AppCompatActivity
    // Fragment fragment=null;
    protected static SQLiteDatabase db;
     Toolbar toolbar;
-   // TextView cartstatus;
+    TextView cartstatus;
     private VegiesFragment f1;
     private DairyproductsFragment f2;
     @Override
@@ -47,6 +48,14 @@ public class MyActivity extends AppCompatActivity
 
 
          toolbar = (Toolbar) findViewById(R.id.toolbar);
+        cartstatus=(TextView)findViewById(R.id.cartstatus);
+        cartstatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyActivity.this,CartActivity.class);
+                startActivity(intent);
+            }
+        });
          //cartstatus  = (TextView)findViewById(R.id.cartstatus);
        /* if (Carthelper.itemsCount==0)
         {
@@ -177,10 +186,14 @@ public class MyActivity extends AppCompatActivity
         Log.i("DB", "DB created for local use");
 
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        db.close();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        db.close();
     }
 }

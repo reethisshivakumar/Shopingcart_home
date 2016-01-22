@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:id="@+id/cimageView"
+        android:src = "@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+        <TextView
+            android:id="@+id/cpid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=""
+            android:textColor="#040404"
+            android:typeface="sans"
+            android:textSize="15dip"
+            android:textStyle="bold"/>
+
+        <!-- Artist Name -->
+        <TextView
+            android:id="@+id/cpname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="#343434"
+            android:textSize="10dip"
+            android:layout_marginTop="1dip"
+
+            android:text="" />
+
+        <!-- Rightend Duration -->
+        <!-- <TextView
+             android:id="@+id/cpdesc"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:gravity="right"
+             android:text=""
+             android:layout_marginRight="5dip"
+             android:textSize="10dip"
+             android:textColor="#10bcc9"
+             android:textStyle="bold"/>-->
+        <TextView
+            android:id="@+id/cpprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:gravity="right"
+            android:text=""
+            android:layout_marginRight="5dip"
+            android:textSize="10dip"
+            android:textColor="#10bcc9"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/cremoveproduct" />
+        <TextView
+            android:id="@+id/cquantity"
+            android:text="90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/caddproduct" />
+    </LinearLayout>
+
+</LinearLayout>
