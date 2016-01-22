@@ -79,6 +79,12 @@ public class Cartadapter extends BaseAdapter {
         cell.pname.setText(crs.getString(crs.getColumnIndex("p_name")));
         cell.pprice.setText(crs.getString(crs.getColumnIndex("p_price")));
         cell.pquantity.setText(crs.getString(crs.getColumnIndex("p_quantity")));
+        cell.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         // if (!crs.isAfterLast())
         //crs.moveToNext();
         String idofuser = crs.getString(crs.getColumnIndex("p_id"));
