@@ -123,6 +123,7 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    cell.addcart.setBackgroundResource(R.mipmap.adderback);
                     cell.addcart.setText("+" + cell.count);
                     cell.removecart.setVisibility(View.VISIBLE);
                         Carthelper.itemsCount = Carthelper.itemsCount+1;
@@ -144,9 +145,10 @@ public class GetAllProductListViewAdapter extends BaseAdapter {
                     public void onClick(View v) {
 
                         cell.count = cell.count - 1;
-                        if (cell.count==0) {
+                        if (cell.count<=0) {
                             cell.removecart.setVisibility(View.INVISIBLE);
-                            cell.addcart.setText("+");
+                            cell.addcart.setText("");
+                            cell.addcart.setBackgroundResource(R.mipmap.adder);
                             try {
                                 String where = "p_id= ?";
                                 String[] whereargs = new String[]{jsonObject.getString("product_id")};

@@ -10,14 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
-    private static SQLiteDatabase db  ;
+    protected static SQLiteDatabase db  ;
     private Cursor crs;
+    ArrayList<Cartdata> mylist=new ArrayList<Cartdata>();
+    Cartdata cdata;
     ListView GetAllProductListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,20 @@ public class CartActivity extends AppCompatActivity {
         }*/
         db=openOrCreateDatabase("appDB.db", Context.MODE_PRIVATE, null);
         crs = db.rawQuery("SELECT * FROM cartcontents;", null);
-        this.GetAllProductListView.setAdapter(new Cartadapter(crs,this));
+        crs.moveToFirst();
+        while (!crs.isAfterLast())
+        {
+            cdata = new Cartdata(crs.getString(crs.getColumnIndex("p_id")),crs.getString(crs.getColumnIndex("p_name")),crs.getString(crs.getColumnIndex("p_id")), crs.getInt(crs.getColumnIndex("p_price")),crs.getInt(crs.getColumnIndex("p_quantity")));
+            mylist.add(cdata);
+            crs.moveToNext();
+        }
+        this.GetAllProductListView.setAdapter(new Cartadapter(this,mylist));
+        this.GetAllProductListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
